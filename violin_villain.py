@@ -36,7 +36,7 @@ def generate_note_dict():
                                                             "position_to_a4":exponent,
                                                             "position_on_staff":-1}
       exponent +=1
-  return
+  return note_dict
 
 def draw_staff(note_dict):
   scalar = get_frequency_percentage(note_dict["E4"]["frequency"])
