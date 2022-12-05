@@ -1,11 +1,19 @@
 import crepe
 import sounddevice
 import math
+import pygame
 
 MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
 
+GAME_X = 500
+GAME_Y = 500
+
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
+
+#didnt want to do the math so kind of cheating 
+def get_frequency_percentage(freq):
+  return 1200 * math.log2(freq/1760.) #use a6 as a placeholder
 
 def generate_frequency_dict():
   starting_note = 440 #A4
@@ -20,7 +28,28 @@ def generate_frequency_dict():
       exponent +=1
   return frequency_dict
 
-def execute(frequency_dict):
+def gameloop(frequency_dict):
+  # Did the user click the window close button?
+  for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+          return False
+
+  screen.fill((255,255,255))
+
+  freq, closest_freq, confidence = get_frequency_from_microphone(frequency_dict)
+  
+  if confidence > 0.40:
+    position_scalar = get_frequency_percentage(freq)
+    pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y * position_scalar ), 25)
+
+    print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}')
+  else:
+    print("nothing heard")
+
+  pygame.display.flip()
+  return True
+
+def get_frequency_from_microphone(frequency_dict):
   fs = 16000
   duration = 0.1 #seconds, match with step size~
   recording = sounddevice.rec(int(duration * fs), samplerate=fs, channels=2,dtype='float64')
@@ -47,15 +76,14 @@ def execute(frequency_dict):
   else:
     closest_freq = larger_freq
 
-  if closest_freq == 0 or confidence[0] < 0.25:
-    print("heard nothing")
-  else:
-    print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}')
-
-
+  return freq, closest_freq, confidence[0]
 
 if __name__ == "__main__":
   frequency_dict = generate_frequency_dict()
-  print(frequency_dict)
-  while True:
-    execute(frequency_dict)
+  pygame.init()
+  screen = pygame.display.set_mode([GAME_X, GAME_Y])
+
+  while gameloop(frequency_dict):
+    pass
+
+  pygame.quit()
