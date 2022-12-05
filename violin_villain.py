@@ -35,6 +35,27 @@ def generate_frequency_dict():
       exponent +=1
   return frequency_dict
 
+def draw_staff():
+  scalar = get_frequency_percentage(329.63) #E4
+  #flip Y
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+
+  scalar = get_frequency_percentage(392.00) #G4
+  #flip Y
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+
+  scalar = get_frequency_percentage(493.88) #B4
+  #flip Y
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+
+  scalar = get_frequency_percentage(587.33) #D5
+  #flip Y
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+
+  scalar = get_frequency_percentage(698.46) #F5
+  #flip Y
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+
 def gameloop(frequency_dict):
   # Did the user click the window close button?
   for event in pygame.event.get():
@@ -43,11 +64,14 @@ def gameloop(frequency_dict):
 
   screen.fill((255,255,255))
 
+  draw_staff()
+
   freq, closest_freq, confidence = get_frequency_from_microphone(frequency_dict)
-  
+
   if confidence > 0.40:
     position_scalar = get_frequency_percentage(freq)
-    pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y * position_scalar ), 25)
+    #flip y
+    pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 25)
 
     print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}, {position_scalar}')
   else:
