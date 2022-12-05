@@ -1,7 +1,11 @@
 import crepe
 import sounddevice
+import math
 
 MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+
+def get_percent_note_freq_delta(freq, reference_freq):
+  return 1200 * math.log2(freq/reference_freq)
 
 def generate_frequency_dict():
   starting_note = 440 #A4
@@ -38,14 +42,15 @@ def execute(frequency_dict):
       break
   #now see which is closer
   if smaller_freq > 0:
-    closest_freq = smaller_freq if freq-smaller_freq < larger_freq-freq else larger_freq
+    closest_freq = smaller_freq if abs(get_percent_note_freq_delta(freq, smaller_freq)) < \
+        abs(get_percent_note_freq_delta(freq, larger_freq)) else larger_freq
   else:
     closest_freq = larger_freq
 
   if closest_freq == 0 or confidence[0] < 0.25:
     print("heard nothing")
   else:
-    print(f'{frequency_dict[closest_freq]}, {freq-closest_freq}, {confidence}')
+    print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}')
 
 
 
