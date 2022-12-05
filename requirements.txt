@@ -1,0 +1,3 @@
+crepe==0.0.13
+sounddevice==0.4.5
+tensorflow
