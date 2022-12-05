@@ -71,7 +71,7 @@ def gameloop(frequency_dict):
   if confidence > 0.40:
     position_scalar = get_frequency_percentage(freq)
     #flip y
-    pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 25)
+    pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 10)
 
     print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}, {position_scalar}')
   else:
