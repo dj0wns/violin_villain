@@ -27,7 +27,7 @@ def generate_frequency_dict():
   frequency_dict = {}
   #calculate [a1,a7)
   #starting value is -48 (the number of steps from a1 to a4
-  exponent = -(NUM_OCTAVES*NUM_NOTES/2)
+  exponent = -48
   for i in range(NUM_OCTAVES):
     for j in range(NUM_NOTES):
       note_sub_offset = i + int(j>=3)
