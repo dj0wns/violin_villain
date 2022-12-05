@@ -3,26 +3,33 @@ import sounddevice
 import math
 import pygame
 
+A4 = 440
 MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+NUM_NOTES = 12
+NUM_OCTAVES = 7
 
 GAME_X = 500
 GAME_Y = 500
 
+
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
 
-#didnt want to do the math so kind of cheating 
 def get_frequency_percentage(freq):
-  return 1200 * math.log2(freq/1760.) #use a6 as a placeholder
+  #from https://math.stackexchange.com/a/1471919
+  position = 12*(math.log2(freq) - math.log2(A4))
+  # make the bottom zero rather than the center
+  position += (NUM_NOTES*NUM_OCTAVES/2)
+  return position/(NUM_NOTES*NUM_OCTAVES)
 
 def generate_frequency_dict():
-  starting_note = 440 #A4
+  starting_note = A4
   frequency_dict = {}
-  #calculate [a1,a6)
+  #calculate [a1,a7)
   #starting value is -48 (the number of steps from a1 to a4
-  exponent = -48
-  for i in range(6):
-    for j in range(12):
+  exponent = -(NUM_OCTAVES*NUM_NOTES/2)
+  for i in range(NUM_OCTAVES):
+    for j in range(NUM_NOTES):
       note_sub_offset = i + int(j>=3)
       frequency_dict[starting_note*pow(pow(2,1/12),exponent)] = MUSICAL_NOTES[j] + str(note_sub_offset)
       exponent +=1
