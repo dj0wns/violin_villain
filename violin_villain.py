@@ -6,7 +6,7 @@ import pygame
 A4 = 440
 MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
 NUM_NOTES = 12
-NUM_OCTAVES = 7
+NUM_OCTAVES = 8
 
 GAME_X = 500
 GAME_Y = 500
@@ -25,9 +25,9 @@ def get_frequency_percentage(freq):
 def generate_frequency_dict():
   starting_note = A4
   frequency_dict = {}
-  #calculate [a1,a7)
+  #calculate [a0,a7)
   #starting value is -48 (the number of steps from a1 to a4
-  exponent = -48
+  exponent = -60
   for i in range(NUM_OCTAVES):
     for j in range(NUM_NOTES):
       note_sub_offset = i + int(j>=3)
@@ -36,23 +36,23 @@ def generate_frequency_dict():
   return frequency_dict
 
 def draw_staff():
-  scalar = get_frequency_percentage(164.81) #E3
+  scalar = get_frequency_percentage(329.63) #E4
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(196.00) #G3
+  scalar = get_frequency_percentage(392.00) #G4
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(246.94) #B3
+  scalar = get_frequency_percentage(493.88) #B4
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(293.66) #D4
+  scalar = get_frequency_percentage(587.33) #D5
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(349.23) #F4
+  scalar = get_frequency_percentage(698.46) #F5
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
