@@ -36,23 +36,23 @@ def generate_frequency_dict():
   return frequency_dict
 
 def draw_staff():
-  scalar = get_frequency_percentage(329.63) #E4
+  scalar = get_frequency_percentage(164.81) #E3
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(392.00) #G4
+  scalar = get_frequency_percentage(196.00) #G3
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(493.88) #B4
+  scalar = get_frequency_percentage(246.94) #B3
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(587.33) #D5
+  scalar = get_frequency_percentage(293.66) #D4
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(698.46) #F5
+  scalar = get_frequency_percentage(349.23) #F4
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
