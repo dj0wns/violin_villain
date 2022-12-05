@@ -42,7 +42,7 @@ def gameloop(frequency_dict):
     position_scalar = get_frequency_percentage(freq)
     pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y * position_scalar ), 25)
 
-    print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}')
+    print(f'{frequency_dict[closest_freq]}, {get_percent_note_freq_delta(freq, closest_freq)}, {confidence}, {position_scalar}')
   else:
     print("nothing heard")
 
