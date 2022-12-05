@@ -93,8 +93,8 @@ def get_frequency_from_microphone(note_dict, frequency_to_note_dict):
   # find the last frequency smaller than the recorded frequency
   freq = frequency[0]
   index = 0
-  smaller_note = -1
-  larger_note = -1
+  smaller_note = ""
+  larger_note = ""
   for k, v in frequency_to_note_dict.items():
     if k < freq:
       smaller_note = v
@@ -103,7 +103,7 @@ def get_frequency_from_microphone(note_dict, frequency_to_note_dict):
       larger_note = v
       break
   #now see which is closer
-  if smaller_note > 0:
+  if smaller_note == "":
     closest_note = smaller_note if abs(get_percent_note_freq_delta(freq, note_dict[smaller_note]["frequency"])) < \
         abs(get_percent_note_freq_delta(freq, note_dict[larger_note]["frequency"])) else larger_note
   else:
