@@ -30,7 +30,7 @@ def generate_frequency_dict():
   exponent = -60
   for i in range(NUM_OCTAVES):
     for j in range(NUM_NOTES):
-      note_sub_offset = i + int(j>=3)
+      note_sub_offset = i + int(j>=3) - 1
       frequency_dict[starting_note*pow(pow(2,1/12),exponent)] = MUSICAL_NOTES[j] + str(note_sub_offset)
       exponent +=1
   return frequency_dict
