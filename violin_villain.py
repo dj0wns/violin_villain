@@ -42,7 +42,7 @@ def execute(frequency_dict):
   else:
     closest_freq = larger_freq
 
-  if closest_freq == 0:
+  if closest_freq == 0 or confidence[0] < 0.25:
     print("heard nothing")
   else:
     print(f'{frequency_dict[closest_freq]}, {freq-closest_freq}, {confidence}')
