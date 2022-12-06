@@ -113,6 +113,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
       
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
+    print(note_dict[closest_note])
   else:
     print("nothing heard")
 
