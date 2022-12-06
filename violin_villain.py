@@ -68,7 +68,7 @@ def generate_note_dict():
       exponent +=1
   return note_dict
 
-def draw_staff(note_dict, max_not_position):
+def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position"] / max_note_position
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
@@ -96,7 +96,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
 
   screen.fill((255,255,255))
 
-  draw_staff(note_dict)
+  draw_staff(note_dict, max_note_position)
 
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
