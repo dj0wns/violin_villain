@@ -16,12 +16,42 @@ GAME_Y = 500
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
 
-def get_frequency_percentage(freq):
-  #from https://math.stackexchange.com/a/1471919
-  position = 12*(math.log2(freq) - math.log2(A4))
-  # make the bottom zero rather than the center
-  position += (NUM_NOTES*NUM_OCTAVES/2)
-  return position/(NUM_NOTES*NUM_OCTAVES)
+#returns nearest note_name to a freq
+def get_nearest_note(freq, note_dict):
+  index = 0
+  smaller_note = ""
+  larger_note = ""
+  for k, v in frequency_to_note_dict.items():
+    if k < freq:
+      smaller_note = v
+      continue
+    else:
+      larger_note = v
+      break
+  #now see which is closer
+  if smaller_note == "":
+    closest_note = smaller_note if abs(get_percent_note_freq_delta(freq, note_dict[smaller_note]["frequency"])) < \
+        abs(get_percent_note_freq_delta(freq, note_dict[larger_note]["frequency"])) else larger_note
+  else:
+    closest_note = larger_note
+  return closest_note
+
+def get_max_note_position(note_dict):
+  return note_dict.items()[-1]["position_on_staff"]
+
+def get_frequency_position(freq, note_dict):
+  closest_note = get_nearest_note(freq, note_dict)
+  return note_dict[closest_note]["position_on_staff"]
+
+def generate_note_positions(note_dict):
+  # increment position if first letter is not the same is prior
+  current = "G" # arbitrary starting note
+  position = 0;
+  for k,v in note_dict.items():
+    if k[0] != current[0]:
+      position += 1
+    v["position_on_staff"] = position
+    current = k
 
 def generate_note_dict():
   starting_note = A4
@@ -39,26 +69,26 @@ def generate_note_dict():
   return note_dict
 
 def draw_staff(note_dict):
-  scalar = get_frequency_percentage(note_dict["E4"]["frequency"])
+  scalar = get_frequency_position(note_dict["E4"]["frequency"])
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(note_dict["G4"]["frequency"])
+  scalar = get_frequency_position(note_dict["G4"]["frequency"])
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(note_dict["B4"]["frequency"])
+  scalar = get_frequency_position(note_dict["B4"]["frequency"])
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(note_dict["D5"]["frequency"])
+  scalar = get_frequency_position(note_dict["D5"]["frequency"])
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_percentage(note_dict["F5"]["frequency"])
+  scalar = get_frequency_position(note_dict["F5"]["frequency"])
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-def gameloop(note_dict, frequency_to_note_dict):
+def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   # Did the user click the window close button?
   for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -71,7 +101,7 @@ def gameloop(note_dict, frequency_to_note_dict):
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
   if confidence > 0.40:
-    position_scalar = get_frequency_percentage(freq)
+    position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 10)
 
@@ -92,34 +122,21 @@ def get_frequency_from_microphone(note_dict, frequency_to_note_dict):
 
   # find the last frequency smaller than the recorded frequency
   freq = frequency[0]
-  index = 0
-  smaller_note = ""
-  larger_note = ""
-  for k, v in frequency_to_note_dict.items():
-    if k < freq:
-      smaller_note = v
-      continue
-    else:
-      larger_note = v
-      break
-  #now see which is closer
-  if smaller_note == "":
-    closest_note = smaller_note if abs(get_percent_note_freq_delta(freq, note_dict[smaller_note]["frequency"])) < \
-        abs(get_percent_note_freq_delta(freq, note_dict[larger_note]["frequency"])) else larger_note
-  else:
-    closest_note = larger_note
+  closest_note = get_nearest_note(freq, note_dict)
 
   return freq, closest_note, confidence[0]
 
 if __name__ == "__main__":
   note_dict = generate_note_dict()
+  generate_note_positions(note_dict)
+  max_note_position = get_max_note_position(note_dict)
   frequency_to_note_dict = OrderedDict()
   for k,v in note_dict.items():
     frequency_to_note_dict[v["frequency"]] = k
   pygame.init()
   screen = pygame.display.set_mode([GAME_X, GAME_Y])
 
-  while gameloop(note_dict, frequency_to_note_dict):
+  while gameloop(note_dict, frequency_to_note_dict, max_note_position):
     pass
 
   pygame.quit()
