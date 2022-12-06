@@ -69,22 +69,22 @@ def generate_note_dict():
   return note_dict
 
 def draw_staff(note_dict, max_note_position):
-  scalar = note_dict["E4"]["position"] / max_note_position
+  scalar = note_dict["E4"]["position_on_staff"] / max_note_position
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = note_dict["G4"]["position"] / max_note_position
+  scalar = note_dict["G4"]["position_on_staff"] / max_note_position
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = note_dict["B4"]["position"] / max_note_position
+  scalar = note_dict["B4"]["position_on_staff"] / max_note_position
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = note_dict["D5"]["position"] / max_note_position
+  scalar = note_dict["D5"]["position_on_staff"] / max_note_position
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = note_dict["F5"]["position"] / max_note_position
+  scalar = note_dict["F5"]["position_on_staff"] / max_note_position
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
