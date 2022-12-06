@@ -65,8 +65,8 @@ def generate_note_dict():
       note_dict[MUSICAL_NOTES[j] + str(note_sub_offset)] = {"frequency":starting_note*pow(pow(2,1/12),exponent),
                                                             "position_to_a4":exponent,
                                                             "position_on_staff":-1,
-                                                            "is_flat":MUSICAL_NOTES[j][1] == "b",
-                                                            "is_sharp":MUSICAL_NOTES[j][1] == "#"}
+                                                            "is_flat":len(MUSICAL_NOTES[j]) > 1 and MUSICAL_NOTES[j][1] == "b",
+                                                            "is_sharp":len(MUSICAL_NOTES[j]) > 1 and MUSICAL_NOTES[j][1] == "#"}
       exponent +=1
   return note_dict
 
