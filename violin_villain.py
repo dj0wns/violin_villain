@@ -37,7 +37,7 @@ def get_nearest_note(freq, note_dict):
   return closest_note
 
 def get_max_note_position(note_dict):
-  return note_dict.items()[-1]["position_on_staff"]
+  return list(note_dict.values())[-1]["position_on_staff"]
 
 def get_frequency_position(freq, note_dict):
   closest_note = get_nearest_note(freq, note_dict)
