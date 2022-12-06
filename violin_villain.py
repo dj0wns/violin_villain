@@ -107,9 +107,10 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     #flip y
     pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 10)
     if note_dict[closest_note]["is_flat"]:
-      pygame.draw.line(screen, (0, 0, 255), (114, GAME_Y - (GAME_Y * position_scalar)), (120, GAME_Y - (GAME_Y * position_scalar)), 4)
+      pygame.draw.line(screen, (0, 0, 255), (114, GAME_Y - (GAME_Y * position_scalar)), (130, GAME_Y - (GAME_Y * position_scalar)), 4)
     if note_dict[closest_note]["is_sharp"]:
-      pygame.draw.line(screen, (0, 0, 255), (117, GAME_Y - (GAME_Y * position_scalar) - 3), (117, GAME_Y - (GAME_Y * position_scalar)+3), 4)
+      pygame.draw.line(screen, (0, 0, 255), (114, GAME_Y - (GAME_Y * position_scalar)), (130, GAME_Y - (GAME_Y * position_scalar)), 4)
+      pygame.draw.line(screen, (0, 0, 255), (122, GAME_Y - (GAME_Y * position_scalar) - 8), (122, GAME_Y - (GAME_Y * position_scalar)+8), 4)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
