@@ -69,22 +69,22 @@ def generate_note_dict():
   return note_dict
 
 def draw_staff(note_dict):
-  scalar = get_frequency_position(note_dict["E4"]["frequency"])
+  scalar = get_frequency_position(note_dict["E4"]["frequency"], note_dict)
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_position(note_dict["G4"]["frequency"])
+  scalar = get_frequency_position(note_dict["G4"]["frequency"], note_dict)
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_position(note_dict["B4"]["frequency"])
+  scalar = get_frequency_position(note_dict["B4"]["frequency"], note_dict)
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_position(note_dict["D5"]["frequency"])
+  scalar = get_frequency_position(note_dict["D5"]["frequency"], note_dict)
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
-  scalar = get_frequency_position(note_dict["F5"]["frequency"])
+  scalar = get_frequency_position(note_dict["F5"]["frequency"], note_dict)
   #flip Y
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
 
