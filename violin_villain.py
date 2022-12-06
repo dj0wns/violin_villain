@@ -64,7 +64,9 @@ def generate_note_dict():
       note_sub_offset = i + int(j>=3) - 1
       note_dict[MUSICAL_NOTES[j] + str(note_sub_offset)] = {"frequency":starting_note*pow(pow(2,1/12),exponent),
                                                             "position_to_a4":exponent,
-                                                            "position_on_staff":-1}
+                                                            "position_on_staff":-1,
+                                                            "is_flat":MUSICAL_NOTES[j][1] == "b",
+                                                            "is_sharp":MUSICAL_NOTES[j][1] == "#"}
       exponent +=1
   return note_dict
 
@@ -104,6 +106,11 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     pygame.draw.circle(screen, (0, 0, 255), (100, GAME_Y - (GAME_Y * position_scalar)), 10)
+    if note_dict[closest_note]["is_flat"]:
+      pygame.draw.line(screen, (0, 0, 255), (104, GAME_Y - (GAME_Y * position_scalar)), (110, GAME_Y - (GAME_Y * position_scalar)), 4)
+    if note_dict[closest_note]["is_sharp"]:
+      pygame.draw.line(screen, (0, 0, 255), (107, GAME_Y - (GAME_Y * position_scalar) - 3), (107, GAME_Y - (GAME_Y * position_scalar)+3), 4)
+      
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
   else:
