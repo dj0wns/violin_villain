@@ -71,10 +71,10 @@ def generate_note_dict():
   return note_dict
 
 def draw_sharp(center_x, center_y):
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 4)
-  pygame.draw.line(screen, (0, 0, 255), (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 4)
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y - 3), (center_x + 9, center_y - 5), 4)
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y + 5), (center_x + 9, center_y + 3), 4)
+  pygame.draw.line(screen, (0, 0, 255), (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 3)
+  pygame.draw.line(screen, (0, 0, 255), (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 3)
+  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y - 3), (center_x + 9, center_y - 5), 3)
+  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y + 5), (center_x + 9, center_y + 3), 3)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
