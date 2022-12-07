@@ -22,6 +22,8 @@ CURSOR_LINE_OFFSET = 5
 
 TREBLE_CLEF = pygame.image.load(os.path.join(ASSET_DIR, "treble_clef.png"))
 TREBLE_CLEF_INDENT = 50
+TREBLE_X = 75
+TREBLE_Y = 128
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
@@ -100,7 +102,7 @@ def draw_static_images(note_dict, max_note_position):
   # center to center of staff
   staff_center_scalar = note_dict["B4"]["position_on_staff"] / max_note_position
   staff_center_y = GAME_Y - (GAME_Y * staff_center_scalar)
-  screen.blit(TREBLE_CLEF, (TREBLE_CLEF_INDENT, staff_center_y))
+  screen.blit(TREBLE_CLEF, (TREBLE_CLEF_INDENT - WORLD_SCALAR*TREBLE_X/2, staff_center_y - WORLD_SCALAR*TREBLE_Y/2))
 
 def draw_sharp(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 5), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
@@ -209,6 +211,7 @@ if __name__ == "__main__":
   pygame.init()
   screen = pygame.display.set_mode([GAME_X, GAME_Y])
   #set up images
+  pygame.transform.scale(TREBLE_CLEF(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
   TREBLE_CLEF.convert_alpha()
 
   while gameloop(note_dict, frequency_to_note_dict, max_note_position):
