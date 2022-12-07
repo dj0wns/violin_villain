@@ -12,10 +12,10 @@ MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'
 NUM_NOTES = 12
 NUM_OCTAVES = 8
 
-GAME_X = 1400
-GAME_Y = 1200
+GAME_X = 1920
+GAME_Y = 1080
 WORLD_SCALAR = 2
-CURSOR_POSITION = 200
+CURSOR_POSITION = 250
 CURSOR_RADIUS = 8
 CURSOR_ACCIDENTAL_DISTANCE = 15
 CURSOR_LINE_OFFSET = 5
@@ -31,6 +31,9 @@ USER_NOTE_COLORS = [
 (84,240,118),
 (174,70,250),
 ]
+
+NOTE_ZONE_COLOR = (252, 232, 131)
+NOTE_ZONE_WIDTH = 50
 
 def get_color_from_distance(cents_off):
   #stepwise coloring
@@ -80,6 +83,12 @@ def generate_note_positions(note_dict):
       position += 1
     v["position_on_staff"] = position
     current = k
+
+def draw_note_zone():
+   pygame.draw.line(screen, NOTE_ZONE_COLOR,
+                    (WORLD_SCALAR * CURSOR_POSITION, 0),
+                    (WORLD_SCALAR * CURSOR_POSITION, GAME_Y),
+                    WORLD_SCALAR * NOTE_ZONE_WIDTH)
 
 def generate_note_dict():
   starting_note = A4
@@ -159,8 +168,8 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
 
   screen.fill((255,255,255))
 
+  draw_note_zone()
   draw_staff(note_dict, max_note_position)
-
   draw_static_images(note_dict, max_note_position)
 
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
