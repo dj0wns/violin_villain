@@ -15,6 +15,7 @@ WORLD_SCALAR = 2
 CURSOR_POSITION = 200
 CURSOR_RADIUS = 8
 CURSOR_ACCIDENTAL_DISTANCE = 15
+CURSOR_LINE_OFFSET = 5
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
@@ -101,6 +102,23 @@ def draw_flat(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 3), WORLD_SCALAR * 3)
   pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 1), (center_x - WORLD_SCALAR , center_y), WORLD_SCALAR * 3)
 
+def draw_off_staff_lines(note, note_dict, max_note_position):
+  if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
+    # below the staff
+    for i in range(note_dict["F5"]["position_on_staff"]-2, note_dict[note]["position_on_staff"], -2):
+      scalar = i / max_note_position
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          (CURSOR + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          WORLD_SCALAR * 4)
+  elif note_dict[note]["position_on_staff"] < note_dict["E4"]["position_on_staff"]:
+    # above the staff
+    for i in range(note_dict["E4"]["position_on_staff"]+2, note_dict[note]["position_on_staff"], 2):
+      scalar = i / max_note_position
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          (CURSOR + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          WORLD_SCALAR * 4)
+
+
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
   pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
@@ -139,6 +157,8 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
       draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     if note_dict[closest_note]["is_sharp"]:
       draw_sharp(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
+    draw_off_staff_lines(closest_note, note_dict, max_note_position)
+
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
