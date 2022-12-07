@@ -15,24 +15,18 @@ GAME_Y = 500
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
 (255,143,49),
-(216,206,65),
 (84,240,118),
-(65,154,217),
 (174,70,250),
 ]
 
 def get_color_from_distance(cents_off):
   #stepwise coloring
-  if cents_off > 25:
+  if cents_off > 20:
     return USER_NOTE_COLORS[0]
-  elif cents_off > 10:
+  elif cents_off > -20:
     return USER_NOTE_COLORS[1]
-  elif cents_off > -10:
-    return USER_NOTE_COLORS[2]
-  elif cents_off > -25:
-    return USER_NOTE_COLORS[3]
   else:
-    return USER_NOTE_COLORS[4]
+    return USER_NOTE_COLORS[2]
 
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
@@ -99,7 +93,7 @@ def draw_sharp(color, center_x, center_y):
 
 def draw_flat(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x - 5, center_y - 9), 2)
-  pygame.draw.arc(screen, color, pygame.Rect(center_x-5, center_y + 5, 10, 8), math.pi, 2. * math.pi,2)
+  pygame.draw.arc(screen, color, pygame.Rect(center_x-5, center_y + 15, 15, 10), math.pi, 2. * math.pi,2)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
