@@ -149,7 +149,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
 
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
-  if confidence > 0.40:
+  if confidence > 0.60:
     color = get_color_from_distance(get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"]))
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
