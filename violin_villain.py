@@ -21,9 +21,9 @@ CURSOR_ACCIDENTAL_DISTANCE = 15
 CURSOR_LINE_OFFSET = 5
 
 TREBLE_CLEF = pygame.image.load(os.path.join(ASSET_DIR, "treble_clef.png"))
-TREBLE_CLEF_INDENT = 50
-TREBLE_X = 75
-TREBLE_Y = 128
+TREBLE_CLEF_INDENT = 30
+TREBLE_X = 90
+TREBLE_Y = 154
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
@@ -102,7 +102,7 @@ def draw_static_images(note_dict, max_note_position):
   # center to center of staff
   staff_center_scalar = note_dict["B4"]["position_on_staff"] / max_note_position
   staff_center_y = GAME_Y - (GAME_Y * staff_center_scalar)
-  screen.blit(TREBLE_CLEF, (TREBLE_CLEF_INDENT - WORLD_SCALAR*TREBLE_X/2, staff_center_y - WORLD_SCALAR*TREBLE_Y/2))
+  screen.blit(TREBLE_CLEF, (WORLD_SCALAR*TREBLE_CLEF_INDENT - WORLD_SCALAR*TREBLE_X/2, staff_center_y - WORLD_SCALAR*TREBLE_Y/2))
 
 def draw_sharp(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 5), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
@@ -122,34 +122,34 @@ def draw_off_staff_lines(note, note_dict, max_note_position):
     # shift position by 2 so it goes over the current position
     for i in range(note_dict["F5"]["position_on_staff"]-2, note_dict[note]["position_on_staff"]-1, -2):
       scalar = i / max_note_position
-      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET),  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          (CURSOR_POSITION + WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET), GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          WORLD_SCALAR * 4)
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET),  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5),
+                                          (CURSOR_POSITION + WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET), GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5),
+                                          WORLD_SCALAR * 2)
   elif note_dict[note]["position_on_staff"] > note_dict["E4"]["position_on_staff"]:
     # above the staff
     # shift position by 2 so it goes over the current position
     for i in range(note_dict["E4"]["position_on_staff"]+2, note_dict[note]["position_on_staff"]+1, 2):
       scalar = i / max_note_position
-      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET),  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          (CURSOR_POSITION + WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET), GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          WORLD_SCALAR * 4)
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET),  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5),
+                                          (CURSOR_POSITION + WORLD_SCALAR * (CURSOR_RADIUS + CURSOR_LINE_OFFSET), GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5),
+                                          WORLD_SCALAR * 2)
 
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
   scalar = note_dict["G4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
   scalar = note_dict["B4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
   scalar = note_dict["D5"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
   scalar = note_dict["F5"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
 def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   # Did the user click the window close button?
