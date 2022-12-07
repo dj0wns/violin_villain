@@ -12,6 +12,33 @@ NUM_OCTAVES = 8
 GAME_X = 500
 GAME_Y = 500
 
+# from too low to too high, center is ideal
+USER_NOTE_COLORS = [
+(42,29,173),
+(109,0,144),
+(136,0,112),
+(149,0,82),
+(155,0,55),
+(145,0,32),
+(135,10,10),
+]
+
+def get_color_from_distance(cents_off):
+  #stepwise coloring
+  if cents_off > 0.3:
+    return USER_NOTE_COLORS[0]
+  elif cents_off > 0.15:
+    return USER_NOTE_COLORS[1]
+  elif cents_off > 0.05:
+    return USER_NOTE_COLORS[2]
+  elif cents_off > -0.05:
+    return USER_NOTE_COLORS[3]
+  elif cents_off > -0.15:
+    return USER_NOTE_COLORS[4]
+  elif cents_off > -0.3:
+    return USER_NOTE_COLORS[5]
+  else:
+    return USER_NOTE_COLORS[6]
 
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
@@ -70,11 +97,11 @@ def generate_note_dict():
       exponent +=1
   return note_dict
 
-def draw_sharp(center_x, center_y):
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 3)
-  pygame.draw.line(screen, (0, 0, 255), (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 3)
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y - 3), (center_x + 9, center_y - 5), 3)
-  pygame.draw.line(screen, (0, 0, 255), (center_x - 9, center_y + 5), (center_x + 9, center_y + 3), 3)
+def draw_sharp(color, center_x, center_y):
+  pygame.draw.line(screen, color, (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 2)
+  pygame.draw.line(screen, color, (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 2)
+  pygame.draw.line(screen, color, (center_x - 9, center_y - 3), (center_x + 9, center_y - 5), 3)
+  pygame.draw.line(screen, color, (center_x - 9, center_y + 5), (center_x + 9, center_y + 3), 3)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
@@ -109,14 +136,15 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
   if confidence > 0.40:
+    color = get_color_from_distance(get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"]))
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     y_position = GAME_Y - (GAME_Y * position_scalar)
-    pygame.draw.circle(screen, (0, 0, 255), (100, y_position), 10)
+    pygame.draw.circle(screen, color, (100, y_position), 10)
     if note_dict[closest_note]["is_flat"]:
-      pygame.draw.line(screen, (0, 0, 255), (114, GAME_Y - (GAME_Y * position_scalar)), (130, GAME_Y - (GAME_Y * position_scalar)), 4)
+      pygame.draw.line(screen, color, (114, GAME_Y - (GAME_Y * position_scalar)), (130, GAME_Y - (GAME_Y * position_scalar)), 4)
     if note_dict[closest_note]["is_sharp"]:
-      draw_sharp(125, y_position)
+      draw_sharp(color, 125, y_position)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
