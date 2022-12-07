@@ -98,7 +98,7 @@ def draw_sharp(color, center_x, center_y):
 def draw_flat(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x - WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 7), WORLD_SCALAR * 2)
   pygame.draw.arc(screen, color, pygame.Rect(center_x - WORLD_SCALAR * 7, center_y - WORLD_SCALAR * 1, WORLD_SCALAR * 10, WORLD_SCALAR * 7), 1.75*math.pi, 2.5*math.pi, WORLD_SCALAR * 4)
-  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x, center_y + WORLD_SCALAR * 3), WORLD_SCALAR * 3)
+  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 3), WORLD_SCALAR * 3)
   pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 1), (center_x - WORLD_SCALAR , center_y), WORLD_SCALAR * 3)
 
 def draw_staff(note_dict, max_note_position):
