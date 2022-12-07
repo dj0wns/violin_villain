@@ -103,19 +103,19 @@ def draw_flat(color, center_x, center_y):
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
   scalar = note_dict["G4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
   scalar = note_dict["B4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
   scalar = note_dict["D5"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
   scalar = note_dict["F5"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), (GAME_X, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
 def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   # Did the user click the window close button?
