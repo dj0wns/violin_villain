@@ -107,15 +107,15 @@ def draw_off_staff_lines(note, note_dict, max_note_position):
     # below the staff
     for i in range(note_dict["F5"]["position_on_staff"]-2, note_dict[note]["position_on_staff"], -2):
       scalar = i / max_note_position
-      pygame.draw.line(screen, (0, 0, 0), (CURSOR - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          (CURSOR + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          (CURSOR_POSITION + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
                                           WORLD_SCALAR * 4)
   elif note_dict[note]["position_on_staff"] < note_dict["E4"]["position_on_staff"]:
     # above the staff
     for i in range(note_dict["E4"]["position_on_staff"]+2, note_dict[note]["position_on_staff"], 2):
       scalar = i / max_note_position
-      pygame.draw.line(screen, (0, 0, 0), (CURSOR - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
-                                          (CURSOR + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+      pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
+                                          (CURSOR_POSITION + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
                                           WORLD_SCALAR * 4)
 
 
@@ -152,12 +152,12 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     y_position = GAME_Y - (GAME_Y * position_scalar)
+    draw_off_staff_lines(closest_note, note_dict, max_note_position)
     pygame.draw.circle(screen, color, (CURSOR_POSITION, y_position), WORLD_SCALAR * CURSOR_RADIUS)
     if note_dict[closest_note]["is_flat"]:
       draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     if note_dict[closest_note]["is_sharp"]:
       draw_sharp(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
-    draw_off_staff_lines(closest_note, note_dict, max_note_position)
 
 
 
