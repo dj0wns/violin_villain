@@ -14,11 +14,11 @@ GAME_Y = 500
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
-(174,70,250),
-(65,154,217),
-(84,240,118),
-(216,206,65),
 (255,143,49),
+(216,206,65),
+(84,240,118),
+(65,154,217),
+(174,70,250),
 ]
 
 def get_color_from_distance(cents_off):
