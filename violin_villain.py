@@ -90,10 +90,10 @@ def generate_note_dict():
   return note_dict
 
 def draw_sharp(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 3, center_y + WORLD_SCALAR * 7), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 7), WORLD_SCALAR * 1)
-  pygame.draw.line(screen, color, (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 7), (center_x + WORLD_SCALAR * 3, center_y - WORLD_SCALAR * 7), WORLD_SCALAR * 1)
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 5, center_y - WORLD_SCALAR * 1), (center_x + WORLD_SCALAR * 5, center_y - WORLD_SCALAR * 3), WORLD_SCALAR * 2)
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 5, center_y + WORLD_SCALAR * 3), (center_x + WORLD_SCALAR * 5, center_y + WORLD_SCALAR * 1), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 5), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
+  pygame.draw.line(screen, color, (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 5), (center_x + WORLD_SCALAR * 2, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 1), (center_x + WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 2), (center_x + WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 1), WORLD_SCALAR * 2)
 
 def draw_flat(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x - WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 7), WORLD_SCALAR * 2)
