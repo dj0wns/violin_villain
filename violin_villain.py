@@ -9,10 +9,10 @@ MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'
 NUM_NOTES = 12
 NUM_OCTAVES = 8
 
-GAME_X = 500
-GAME_Y = 500
+GAME_X = 1000
+GAME_Y = 1000
 WORLD_SCALAR = 2
-CURSOR_POSITION = 100
+CURSOR_POSITION = 200
 CURSOR_ACCIDENTAL_DISTANCE = 20
 
 # from too low to too high, center is ideal
