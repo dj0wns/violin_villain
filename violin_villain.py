@@ -13,6 +13,7 @@ GAME_X = 1000
 GAME_Y = 1000
 WORLD_SCALAR = 2
 CURSOR_POSITION = 200
+CURSOR_RADIUS = 8
 CURSOR_ACCIDENTAL_DISTANCE = 20
 
 # from too low to too high, center is ideal
@@ -137,7 +138,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     y_position = GAME_Y - (GAME_Y * position_scalar)
-    pygame.draw.circle(screen, color, (CURSOR_POSITION, y_position), WORLD_SCALAR * 10)
+    pygame.draw.circle(screen, color, (CURSOR_POSITION, y_position), WORLD_SCALAR * CURSOR_RADIUS)
     if note_dict[closest_note]["is_flat"]:
       draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     if note_dict[closest_note]["is_sharp"]:
