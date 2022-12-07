@@ -94,7 +94,8 @@ def draw_sharp(color, center_x, center_y):
 def draw_flat(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x - 5, center_y - 9), 2)
   pygame.draw.arc(screen, color, pygame.Rect(center_x-7, center_y - 2, 15, 10), 1.75*math.pi, 2.5*math.pi, 3)
-  pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x, center_y + 5), 2)
+  pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x+2, center_y + 5), 2)
+  pygame.draw.line(screen, color, (center_x-5, center_y +2), (center_x, center_y), 2)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
