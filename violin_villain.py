@@ -32,7 +32,7 @@ USER_NOTE_COLORS = [
 (174,70,250),
 ]
 
-NOTE_ZONE_COLOR = (252, 232, 131)
+NOTE_ZONE_COLOR = (255, 253, 208)
 NOTE_ZONE_WIDTH = 50
 
 def get_color_from_distance(cents_off):
