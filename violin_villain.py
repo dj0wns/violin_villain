@@ -11,6 +11,9 @@ NUM_OCTAVES = 8
 
 GAME_X = 500
 GAME_Y = 500
+WORLD_SCALAR = 2
+CURSOR_POSITION = 100
+CURSOR_ACCIDENTAL_DISTANCE = 20
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
@@ -86,36 +89,36 @@ def generate_note_dict():
   return note_dict
 
 def draw_sharp(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x - 4, center_y + 9), (center_x - 2, center_y - 9), 2)
-  pygame.draw.line(screen, color, (center_x + 2, center_y + 9), (center_x + 4, center_y - 9), 2)
-  pygame.draw.line(screen, color, (center_x - 7, center_y - 2), (center_x + 7, center_y - 4), 4)
-  pygame.draw.line(screen, color, (center_x - 7, center_y + 4), (center_x + 7, center_y + 2), 4)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 9), (center_x - WORLD_SCALAR * 2, center_y - WORLD_SCALAR * 9), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, color, (center_x + WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 9), (center_x + WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 9), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 7, center_y - WORLD_SCALAR * 2), (center_x + WORLD_SCALAR * 7, center_y - WORLD_SCALAR * 4), WORLD_SCALAR * 4)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 7, center_y + WORLD_SCALAR * 4), (center_x + WORLD_SCALAR * 7, center_y + WORLD_SCALAR * 2), WORLD_SCALAR * 4)
 
 def draw_flat(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x - 5, center_y - 9), 2)
-  pygame.draw.arc(screen, color, pygame.Rect(center_x-8, center_y - 2, 15, 8), 1.75*math.pi, 2.5*math.pi, 4)
-  pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x, center_y + 5), 3)
-  pygame.draw.line(screen, color, (center_x-5, center_y +2), (center_x-2, center_y), 3)
+  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 5, center_y + WORLD_SCALAR * 9), (center_x - WORLD_SCALAR * 5, center_y - WORLD_SCALAR * 9), WORLD_SCALAR * 2)
+  pygame.draw.arc(screen, color, pygame.Rect(center_x - WORLD_SCALAR * 8, center_y - WORLD_SCALAR * 2, WORLD_SCALAR * 15, WORLD_SCALAR * 8), 1.75*math.pi, 2.5*math.pi, WORLD_SCALAR * 4)
+  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 5, center_y + WORLD_SCALAR * 9), (center_x, center_y + WORLD_SCALAR * 5), WORLD_SCALAR * 3)
+  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 5, center_y + WORLD_SCALAR * 2), (center_x - WORLD_SCALAR * 2, center_y), WORLD_SCALAR * 3)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
   #flip Y
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), WORLD_SCALAR * 5)
 
   scalar = note_dict["G4"]["position_on_staff"] / max_note_position
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), WORLD_SCALAR * 5)
 
   scalar = note_dict["B4"]["position_on_staff"] / max_note_position
   #flip Y
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), WORLD_SCALAR * 5)
 
   scalar = note_dict["D5"]["position_on_staff"] / max_note_position
   #flip Y
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), WORLD_SCALAR * 5)
 
   scalar = note_dict["F5"]["position_on_staff"] / max_note_position
   #flip Y
-  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), 5)
+  pygame.draw.line(screen, (0, 0, 0), (0,  GAME_Y - (GAME_Y * scalar)), (GAME_X, GAME_Y - (GAME_Y * scalar)), WORLD_SCALAR * 5)
 
 def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   # Did the user click the window close button?
@@ -134,13 +137,13 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     position_scalar = get_frequency_position(freq, note_dict) / max_note_position
     #flip y
     y_position = GAME_Y - (GAME_Y * position_scalar)
-    pygame.draw.circle(screen, color, (100, y_position), 10)
+    pygame.draw.circle(screen, color, (CURSOR_POSITION, y_position), WORLD_SCALAR * 10)
     if note_dict[closest_note]["is_flat"]:
-      draw_flat(color, 75, y_position)
+      draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     if note_dict[closest_note]["is_sharp"]:
-      draw_sharp(color, 75, y_position)
+      draw_sharp(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     else:
-      draw_flat(color, 75, y_position)
+      draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
