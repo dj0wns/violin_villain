@@ -2,7 +2,10 @@ import crepe
 import sounddevice
 import math
 import pygame
+import os
 from collections import OrderedDict
+
+ASSET_DIR = os.path.join(os.path.dirname(__file__), "assets")
 
 A4 = 440
 MUSICAL_NOTES = ['A', 'Bb', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
@@ -16,6 +19,9 @@ CURSOR_POSITION = 200
 CURSOR_RADIUS = 8
 CURSOR_ACCIDENTAL_DISTANCE = 15
 CURSOR_LINE_OFFSET = 5
+
+TREBLE_CLEF = pygame.image.load(os.path.join(ASSET_DIR, "treble_clef.png"))
+TREBLE_CLEF_INDENT = 50
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
@@ -90,6 +96,12 @@ def generate_note_dict():
       exponent +=1
   return note_dict
 
+def draw_static_images(note_dict, max_note_position):
+  # center to center of staff
+  staff_center_scalar = note_dict["B4"]["position_on_staff"] / max_note_position
+  staff_center_y = GAME_Y - (GAME_Y * staff_center_scalar)
+  screen.blit(TREBLE_CLEF, (TREBLE_CLEF_INDENT, staff_center_y))
+
 def draw_sharp(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 5), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
   pygame.draw.line(screen, color, (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 5), (center_x + WORLD_SCALAR * 2, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
@@ -147,6 +159,8 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
 
   draw_staff(note_dict, max_note_position)
 
+  draw_static_images(note_dict, max_note_position)
+
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
   if confidence > 0.60:
@@ -189,6 +203,7 @@ if __name__ == "__main__":
   generate_note_positions(note_dict)
   max_note_position = get_max_note_position(note_dict)
   frequency_to_note_dict = OrderedDict()
+  TREBLE_CLEF.convert_alpha()
   for k,v in note_dict.items():
     frequency_to_note_dict[v["frequency"]] = k
   pygame.init()
