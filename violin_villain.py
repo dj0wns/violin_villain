@@ -25,17 +25,17 @@ USER_NOTE_COLORS = [
 
 def get_color_from_distance(cents_off):
   #stepwise coloring
-  if cents_off > 0.3:
+  if cents_off > 30:
     return USER_NOTE_COLORS[0]
-  elif cents_off > 0.15:
+  elif cents_off > 15:
     return USER_NOTE_COLORS[1]
-  elif cents_off > 0.05:
+  elif cents_off > 5:
     return USER_NOTE_COLORS[2]
-  elif cents_off > -0.05:
+  elif cents_off > -5:
     return USER_NOTE_COLORS[3]
-  elif cents_off > -0.15:
+  elif cents_off > -15:
     return USER_NOTE_COLORS[4]
-  elif cents_off > -0.3:
+  elif cents_off > -30:
     return USER_NOTE_COLORS[5]
   else:
     return USER_NOTE_COLORS[6]
