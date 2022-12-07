@@ -14,31 +14,25 @@ GAME_Y = 500
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
-(42,29,173),
-(109,0,144),
-(136,0,112),
-(149,0,82),
-(155,0,55),
-(145,0,32),
-(135,10,10),
+(174,70,250),
+(65,154,217),
+(84,240,118),
+(216,206,65),
+(255,143,49),
 ]
 
 def get_color_from_distance(cents_off):
   #stepwise coloring
-  if cents_off > 30:
+  if cents_off > 25:
     return USER_NOTE_COLORS[0]
-  elif cents_off > 15:
+  elif cents_off > 10:
     return USER_NOTE_COLORS[1]
-  elif cents_off > 5:
+  elif cents_off > -10:
     return USER_NOTE_COLORS[2]
-  elif cents_off > -5:
+  elif cents_off > -25:
     return USER_NOTE_COLORS[3]
-  elif cents_off > -15:
-    return USER_NOTE_COLORS[4]
-  elif cents_off > -30:
-    return USER_NOTE_COLORS[5]
   else:
-    return USER_NOTE_COLORS[6]
+    return USER_NOTE_COLORS[4]
 
 def get_percent_note_freq_delta(freq, reference_freq):
   return 1200 * math.log2(freq/reference_freq)
