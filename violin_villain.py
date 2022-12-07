@@ -114,7 +114,7 @@ def draw_off_staff_lines(note, note_dict, max_note_position):
   elif note_dict[note]["position_on_staff"] > note_dict["E4"]["position_on_staff"]:
     # above the staff
     # shift position by 2 so it goes over the current position
-    for i in range(note_dict["E4"]["position_on_staff"]+2, note_dict[note]["position_on_staff"]+1, 2):
+    for i in range(note_dict["E4"]["position_on_staff"]+2, note_dict[note]["position_on_staff"]+2, 2):
       scalar = i / max_note_position
       pygame.draw.line(screen, (0, 0, 0), (CURSOR_POSITION - WORLD_SCALAR * CURSOR_LINE_OFFSET,  GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
                                           (CURSOR_POSITION + WORLD_SCALAR * CURSOR_LINE_OFFSET, GAME_Y - (GAME_Y * scalar) - WORLD_SCALAR * 1),
