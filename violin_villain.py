@@ -57,6 +57,8 @@ def get_nearest_note(freq, note_dict):
       break
   #now see which is closer
   if smaller_note == "":
+    print(smaller_note, larger_note)
+    print(abs(get_percent_note_freq_delta(freq, note_dict[smaller_note]["frequency"])), abs(get_percent_note_freq_delta(freq, note_dict[larger_note]["frequency"])))
     closest_note = smaller_note if abs(get_percent_note_freq_delta(freq, note_dict[smaller_note]["frequency"])) < \
         abs(get_percent_note_freq_delta(freq, note_dict[larger_note]["frequency"])) else larger_note
   else:
