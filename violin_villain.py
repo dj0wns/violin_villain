@@ -139,8 +139,6 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
       draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
     if note_dict[closest_note]["is_sharp"]:
       draw_sharp(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
-    else:
-      draw_flat(color, CURSOR_POSITION - WORLD_SCALAR * CURSOR_ACCIDENTAL_DISTANCE, y_position)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
