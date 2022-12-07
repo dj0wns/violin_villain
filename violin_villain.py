@@ -94,8 +94,12 @@ def generate_note_dict():
 def draw_sharp(color, center_x, center_y):
   pygame.draw.line(screen, color, (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 2)
   pygame.draw.line(screen, color, (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 2)
-  pygame.draw.line(screen, color, (center_x - 9, center_y - 3), (center_x + 9, center_y - 5), 3)
-  pygame.draw.line(screen, color, (center_x - 9, center_y + 5), (center_x + 9, center_y + 3), 3)
+  pygame.draw.line(screen, color, (center_x - 7, center_y - 2), (center_x + 7, center_y - 4), 4)
+  pygame.draw.line(screen, color, (center_x - 7, center_y + 4), (center_x + 7, center_y + 2), 4)
+
+def draw_flat(color, center_x, center_y):
+  pygame.draw.line(screen, color, (center_x-5, center_y + 9), (center_x - 5, center_y - 9), 2)
+  pygame.draw.arc(screen, color, pygame.Rect(center_x-5, center_y + 5, 10, 8), math.pi, 2. * math.pi,2)
 
 def draw_staff(note_dict, max_note_position):
   scalar = note_dict["E4"]["position_on_staff"] / max_note_position
@@ -136,9 +140,9 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
     y_position = GAME_Y - (GAME_Y * position_scalar)
     pygame.draw.circle(screen, color, (100, y_position), 10)
     if note_dict[closest_note]["is_flat"]:
-      pygame.draw.line(screen, color, (114, GAME_Y - (GAME_Y * position_scalar)), (130, GAME_Y - (GAME_Y * position_scalar)), 4)
+      draw_flat(color, 75, y_position)
     if note_dict[closest_note]["is_sharp"]:
-      draw_sharp(color, 125, y_position)
+      draw_sharp(color, 75, y_position)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
