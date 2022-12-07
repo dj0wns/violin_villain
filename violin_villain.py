@@ -203,11 +203,13 @@ if __name__ == "__main__":
   generate_note_positions(note_dict)
   max_note_position = get_max_note_position(note_dict)
   frequency_to_note_dict = OrderedDict()
-  TREBLE_CLEF.convert_alpha()
   for k,v in note_dict.items():
     frequency_to_note_dict[v["frequency"]] = k
+
   pygame.init()
   screen = pygame.display.set_mode([GAME_X, GAME_Y])
+  #set up images
+  TREBLE_CLEF.convert_alpha()
 
   while gameloop(note_dict, frequency_to_note_dict, max_note_position):
     pass
