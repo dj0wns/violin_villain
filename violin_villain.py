@@ -92,8 +92,8 @@ def generate_note_dict():
   return note_dict
 
 def draw_sharp(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x - 5, center_y + 9), (center_x - 3, center_y - 9), 2)
-  pygame.draw.line(screen, color, (center_x + 3, center_y + 9), (center_x + 5, center_y - 9), 2)
+  pygame.draw.line(screen, color, (center_x - 4, center_y + 9), (center_x - 2, center_y - 9), 2)
+  pygame.draw.line(screen, color, (center_x + 2, center_y + 9), (center_x + 4, center_y - 9), 2)
   pygame.draw.line(screen, color, (center_x - 7, center_y - 2), (center_x + 7, center_y - 4), 4)
   pygame.draw.line(screen, color, (center_x - 7, center_y + 4), (center_x + 7, center_y + 2), 4)
 
@@ -143,6 +143,8 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
       draw_flat(color, 75, y_position)
     if note_dict[closest_note]["is_sharp"]:
       draw_sharp(color, 75, y_position)
+    else:
+      draw_flat(color, 75, y_position)
 
 
     print(f'{closest_note}, {get_percent_note_freq_delta(freq, note_dict[closest_note]["frequency"])}, {confidence}, {position_scalar}')
