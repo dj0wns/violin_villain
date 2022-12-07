@@ -211,8 +211,8 @@ if __name__ == "__main__":
   pygame.init()
   screen = pygame.display.set_mode([GAME_X, GAME_Y])
   #set up images
-  pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
   TREBLE_CLEF.convert_alpha()
+  TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
 
   while gameloop(note_dict, frequency_to_note_dict, max_note_position):
     pass
