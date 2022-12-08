@@ -25,6 +25,11 @@ TREBLE_CLEF_INDENT = 30
 TREBLE_X = 90
 TREBLE_Y = 154
 
+ACCIDENTAL_X = 20
+ACCIDENTAL_Y = 58
+SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
+FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
+
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
 (255,143,49),
@@ -114,16 +119,10 @@ def draw_static_images(note_dict, max_note_position):
   screen.blit(TREBLE_CLEF, (WORLD_SCALAR*TREBLE_CLEF_INDENT - WORLD_SCALAR*TREBLE_X/2, staff_center_y - WORLD_SCALAR*TREBLE_Y/2))
 
 def draw_sharp(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 2, center_y + WORLD_SCALAR * 5), (center_x - WORLD_SCALAR * 1, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
-  pygame.draw.line(screen, color, (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 5), (center_x + WORLD_SCALAR * 2, center_y - WORLD_SCALAR * 5), WORLD_SCALAR * 1)
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 1), (center_x + WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 2), WORLD_SCALAR * 2)
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 2), (center_x + WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 1), WORLD_SCALAR * 2)
+  screen.blit(SHARP, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - WORLD_SCALAR*ACCIDENTAL_Y/2))
 
 def draw_flat(color, center_x, center_y):
-  pygame.draw.line(screen, color, (center_x - WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x - WORLD_SCALAR * 4, center_y - WORLD_SCALAR * 7), WORLD_SCALAR * 2)
-  pygame.draw.arc(screen, color, pygame.Rect(center_x - WORLD_SCALAR * 7, center_y - WORLD_SCALAR * 1, WORLD_SCALAR * 10, WORLD_SCALAR * 7), 1.75*math.pi, 2.5*math.pi, WORLD_SCALAR * 4)
-  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 7), (center_x + WORLD_SCALAR * 1, center_y + WORLD_SCALAR * 3), WORLD_SCALAR * 3)
-  pygame.draw.line(screen, color, (center_x-WORLD_SCALAR * 4, center_y + WORLD_SCALAR * 1), (center_x - WORLD_SCALAR , center_y), WORLD_SCALAR * 3)
+  screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - WORLD_SCALAR*ACCIDENTAL_Y/2))
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
   if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
@@ -209,6 +208,15 @@ def get_frequency_from_microphone(note_dict, frequency_to_note_dict):
 
   return freq, closest_note, confidence[0]
 
+def init_images():
+  #set up images
+  TREBLE_CLEF.convert_alpha()
+  TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
+  SHARP.convert_alpha()
+  SHARP = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+  FLAT.convert_alpha()
+  FLAT = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+
 if __name__ == "__main__":
   note_dict = generate_note_dict()
   generate_note_positions(note_dict)
@@ -219,9 +227,7 @@ if __name__ == "__main__":
 
   pygame.init()
   screen = pygame.display.set_mode([GAME_X, GAME_Y])
-  #set up images
-  TREBLE_CLEF.convert_alpha()
-  TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
+  init_images()
 
   while gameloop(note_dict, frequency_to_note_dict, max_note_position):
     pass
