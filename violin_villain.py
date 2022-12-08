@@ -122,7 +122,7 @@ def draw_sharp(color, center_x, center_y):
   screen.blit(SHARP, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - WORLD_SCALAR*ACCIDENTAL_Y/2))
 
 def draw_flat(color, center_x, center_y):
-  screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - WORLD_SCALAR*ACCIDENTAL_Y/2))
+  screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
   if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
