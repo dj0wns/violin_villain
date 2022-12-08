@@ -25,8 +25,8 @@ TREBLE_CLEF_INDENT = 30
 TREBLE_X = 90
 TREBLE_Y = 154
 
-ACCIDENTAL_X = 20
-ACCIDENTAL_Y = 58
+ACCIDENTAL_X = 10
+ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
@@ -216,9 +216,9 @@ def init_images():
   TREBLE_CLEF.convert_alpha()
   TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
   SHARP.convert_alpha()
-  SHARP = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+  SHARP = pygame.transform.scale(SHARP,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
   FLAT.convert_alpha()
-  FLAT = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+  FLAT = pygame.transform.scale(FLAT,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
 
 if __name__ == "__main__":
   note_dict = generate_note_dict()
