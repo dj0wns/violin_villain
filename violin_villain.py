@@ -30,12 +30,12 @@ ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
-WHOLE_NOTE_X = 54
-WHOLE_NOTE_Y = 54
+WHOLE_NOTE_X = 40
+WHOLE_NOTE_Y = 40
 WHOLE_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "whole_note.png"))
 
-HALF_NOTE_X = 90
-HALF_NOTE_Y = 90
+HALF_NOTE_X = 86
+HALF_NOTE_Y = 86
 HALF_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "half_note.png"))
 
 QUARTER_NOTE_X = 54
@@ -153,8 +153,8 @@ def draw_quarter_note(note_position, center_x, max_note_position):
   screen.blit(QUARTER_NOTE, (center_x - WORLD_SCALAR * QUARTER_NOTE_X/2, position -  WORLD_SCALAR * 0.78*QUARTER_NOTE_Y))
 
 def draw_music(note_dict, max_note_position):
-  draw_whole_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 80, max_note_position)
-  draw_half_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 40, max_note_position)
+  draw_whole_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 160, max_note_position)
+  draw_half_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 80, max_note_position)
   draw_quarter_note(note_dict["E4"]["position_on_staff"], GAME_X/2, max_note_position)
 
 
