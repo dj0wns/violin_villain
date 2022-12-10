@@ -30,8 +30,8 @@ ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
-QUARTER_NOTE_X = 10
-QUARTER_NOTE_Y = 29
+QUARTER_NOTE_X = 60
+QUARTER_NOTE_Y = 100
 QUARTER_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "quarter_note.png"))
 
 # from too low to too high, center is ideal
@@ -133,7 +133,7 @@ def draw_flat(color, center_x, center_y):
 
 def draw_quarter_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
-  screen.blit(QUARTER_NOTE, (center_x - WORLD_SCALAR * QUARTER_NOTE_X/2, position -  WORLD_SCALAR * QUARTER_NOTE_Y/2))
+  screen.blit(QUARTER_NOTE, (center_x - WORLD_SCALAR * QUARTER_NOTE_X/2, position -  WORLD_SCALAR * 4*QUARTER_NOTE_Y/5))
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
   if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
