@@ -224,6 +224,7 @@ def init_images():
   global TREBLE_CLEF
   global SHARP
   global FLAT
+  global QUARTER_NOTE
   #set up images
   TREBLE_CLEF.convert_alpha()
   TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
