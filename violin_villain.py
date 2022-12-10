@@ -38,6 +38,7 @@ HALF_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "half_note.png"))
 QUARTER_NOTE_X = 54
 QUARTER_NOTE_Y = 90
 QUARTER_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "quarter_note.png"))
+QUARTER_NOTE_FLIP = pygame.image.load(os.path.join(ASSET_DIR, "quarter_note_flip.png"))
 
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
