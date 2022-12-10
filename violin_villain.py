@@ -30,6 +30,10 @@ ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
+QUARTER_NOTE_X = 10
+QUARTER_NOTE_Y = 29
+QUARTER_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "quarter_note.png"))
+
 # from too low to too high, center is ideal
 USER_NOTE_COLORS = [
 (255,143,49),
@@ -112,6 +116,9 @@ def generate_note_dict():
       exponent +=1
   return note_dict
 
+def position_to_y(position, max_note_position):
+  return GAME_Y - (GAME_Y * (position / max_not_position))
+
 def draw_static_images(note_dict, max_note_position):
   # center to center of staff
   staff_center_scalar = note_dict["B4"]["position_on_staff"] / max_note_position
@@ -123,6 +130,10 @@ def draw_sharp(color, center_x, center_y):
 
 def draw_flat(color, center_x, center_y):
   screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
+
+def draw_quarter_note(note_position, center_x, max_note_position):
+  position = position_to_y(note_position, max_note_position)
+  screen.blit(QUARTER_NOTE, (center_x - WORLD_SCALAR * QUARTER_NOTE_X/2), (position -  WORLD_SCALAR * QUARTER_NOTE_Y/2))
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
   if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
@@ -170,6 +181,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   draw_note_zone()
   draw_staff(note_dict, max_note_position)
   draw_static_images(note_dict, max_note_position)
+  draw_quarter_note(note_dict["E4"]["position_on_staff"], GAME_X/2, max_note_position)
 
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
@@ -219,6 +231,8 @@ def init_images():
   SHARP = pygame.transform.scale(SHARP,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
   FLAT.convert_alpha()
   FLAT = pygame.transform.scale(FLAT,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+  QUARTER_NOTE.convert_alpha()
+  QUARTER_NOTE = pygame.transform.scale(QUARTER_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
 
 if __name__ == "__main__":
   note_dict = generate_note_dict()
