@@ -30,12 +30,12 @@ ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
-WHOLE_NOTE_X = 40
-WHOLE_NOTE_Y = 40
+WHOLE_NOTE_X = 36
+WHOLE_NOTE_Y = 36
 WHOLE_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "whole_note.png"))
 
-HALF_NOTE_X = 86
-HALF_NOTE_Y = 86
+HALF_NOTE_X = 80
+HALF_NOTE_Y = 80
 HALF_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "half_note.png"))
 
 QUARTER_NOTE_X = 54
@@ -146,7 +146,7 @@ def draw_whole_note(note_position, center_x, max_note_position):
 
 def draw_half_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
-  screen.blit(HALF_NOTE, (center_x - WORLD_SCALAR * HALF_NOTE_X/2, position -  WORLD_SCALAR * 0.78*HALF_NOTE_Y))
+  screen.blit(HALF_NOTE, (center_x - WORLD_SCALAR * HALF_NOTE_X/2, position -  WORLD_SCALAR * 0.85*HALF_NOTE_Y))
 
 def draw_quarter_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
