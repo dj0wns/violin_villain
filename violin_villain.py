@@ -138,7 +138,7 @@ def draw_flat(color, center_x, center_y):
   screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
 
 def draw_whole_note(note_position, center_x, max_note_position):
-  position = position_to_y(note_position, max_nOte_position)
+  position = position_to_y(note_position, max_note_position)
   screen.blit(WHOLE_NOTE, (center_x - WORLD_SCALAR * WHOLE_NOTE_X/2, position -  WORLD_SCALAR * 0.5*WHOLE_NOTE_Y))
 
 def draw_half_note(note_position, center_x, max_note_position):
