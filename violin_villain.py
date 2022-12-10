@@ -141,8 +141,8 @@ def draw_flat(color, center_x, center_y):
   screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
 
 def draw_vertical_line(center_x, max_note_position):
-  top_y = position_to_y(note_dict["F5"]["position_on_staff"])
-  bot_y = position_to_y(note_dict["E4"]["position_on_staff"])
+  top_y = position_to_y(note_dict["F5"]["position_on_staff"], max_note_position)
+  bot_y = position_to_y(note_dict["E4"]["position_on_staff"], max_note_position~)
   pygame.draw.line(screen, (0, 0, 0), (cemter_x,  GAME_Y - (GAME_Y * top_y) - WORLD_SCALAR * 0.5), (center_x, GAME_Y - (GAME_Y * bottom_y) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
 def draw_whole_note(note_position, center_x, max_note_position):
