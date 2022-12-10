@@ -143,9 +143,7 @@ def draw_flat(color, center_x, center_y):
 def draw_vertical_line(center_x, max_note_position):
   top_y = position_to_y(note_dict["F5"]["position_on_staff"], max_note_position)
   bottom_y = position_to_y(note_dict["E4"]["position_on_staff"], max_note_position)
-  print (top_y, bottom_y)
-  print ((center_x,  GAME_Y - (GAME_Y * top_y) - WORLD_SCALAR * 0.5) , (center_x, GAME_Y - (GAME_Y * bottom_y) - WORLD_SCALAR * 0.5))
-  pygame.draw.line(screen, (0, 0, 0), (center_x,  GAME_Y - (GAME_Y * top_y) - WORLD_SCALAR * 0.5), (center_x, GAME_Y - (GAME_Y * bottom_y) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
+  pygame.draw.line(screen, (0, 0, 0), (center_x,  top_y - WORLD_SCALAR * 0.5), (center_x, bottom_y - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
 
 def draw_whole_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
