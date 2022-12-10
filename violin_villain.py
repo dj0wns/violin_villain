@@ -117,7 +117,7 @@ def generate_note_dict():
   return note_dict
 
 def position_to_y(position, max_note_position):
-  return GAME_Y - (GAME_Y * (position / max_not_position))
+  return GAME_Y - (GAME_Y * (position / max_note_position))
 
 def draw_static_images(note_dict, max_note_position):
   # center to center of staff
