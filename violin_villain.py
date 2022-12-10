@@ -33,6 +33,9 @@ FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 WHOLE_NOTE_X = 54
 WHOLE_NOTE_Y = 54
 WHOLE_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "whole_note.png"))
+
+HALF_NOTE_X = 90
+HALF_NOTE_Y = 90
 HALF_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "half_note.png"))
 
 QUARTER_NOTE_X = 54
@@ -143,7 +146,7 @@ def draw_whole_note(note_position, center_x, max_note_position):
 
 def draw_half_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
-  screen.blit(HALF_NOTE, (center_x - WORLD_SCALAR * WHOLE_NOTE_X/2, position -  WORLD_SCALAR * 0.5*WHOLE_NOTE_Y))
+  screen.blit(HALF_NOTE, (center_x - WORLD_SCALAR * HALF_NOTE_X/2, position -  WORLD_SCALAR * 0.78*HALF_NOTE_Y))
 
 def draw_quarter_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
@@ -256,9 +259,9 @@ def init_images():
   FLAT.convert_alpha()
   FLAT = pygame.transform.scale(FLAT,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
   WHOLE_NOTE.convert_alpha()
-  WHOLE_NOTE = pygame.transform.scale(WHOLE_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
+  WHOLE_NOTE = pygame.transform.scale(WHOLE_NOTE,(WORLD_SCALAR*WHOLE_NOTE_X, WORLD_SCALAR*WHOLE_NOTE_Y))
   HALF_NOTE.convert_alpha()
-  HALF_NOTE = pygame.transform.scale(HALF_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
+  HALF_NOTE = pygame.transform.scale(HALF_NOTE,(WORLD_SCALAR*HALF_NOTE_X, WORLD_SCALAR*HALF_NOTE_Y))
   QUARTER_NOTE.convert_alpha()
   QUARTER_NOTE = pygame.transform.scale(QUARTER_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
   QUARTER_NOTE_FLIP.convert_alpha()
