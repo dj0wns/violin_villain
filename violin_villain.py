@@ -30,6 +30,11 @@ ACCIDENTAL_Y = 29
 SHARP = pygame.image.load(os.path.join(ASSET_DIR, "sharp.png"))
 FLAT = pygame.image.load(os.path.join(ASSET_DIR, "flat.png"))
 
+WHOLE_NOTE_X = 54
+WHOLE_NOTE_Y = 54
+WHOLE_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "whole_note.png"))
+HALF_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "half_note.png"))
+
 QUARTER_NOTE_X = 54
 QUARTER_NOTE_Y = 90
 QUARTER_NOTE = pygame.image.load(os.path.join(ASSET_DIR, "quarter_note.png"))
@@ -131,9 +136,23 @@ def draw_sharp(color, center_x, center_y):
 def draw_flat(color, center_x, center_y):
   screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
 
+def draw_whole_note(note_position, center_x, max_note_position):
+  position = position_to_y(note_position, max_nOte_position)
+  screen.blit(WHOLE_NOTE, (center_x - WORLD_SCALAR * WHOLE_NOTE_X/2, position -  WORLD_SCALAR * 0.5*WHOLE_NOTE_Y))
+
+def draw_half_note(note_position, center_x, max_note_position):
+  position = position_to_y(note_position, max_note_position)
+  screen.blit(HALF_NOTE, (center_x - WORLD_SCALAR * WHOLE_NOTE_X/2, position -  WORLD_SCALAR * 0.5*WHOLE_NOTE_Y))
+
 def draw_quarter_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
   screen.blit(QUARTER_NOTE, (center_x - WORLD_SCALAR * QUARTER_NOTE_X/2, position -  WORLD_SCALAR * 0.78*QUARTER_NOTE_Y))
+
+def draw_music(note_dict, max_note_position):
+  draw_whole_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 80, max_note_position)
+  draw_half_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 40, max_note_position)
+  draw_quarter_note(note_dict["E4"]["position_on_staff"], GAME_X/2, max_note_position)
+
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
   if note_dict[note]["position_on_staff"] < note_dict["F5"]["position_on_staff"]:
@@ -181,7 +200,7 @@ def gameloop(note_dict, frequency_to_note_dict, max_note_position):
   draw_note_zone()
   draw_staff(note_dict, max_note_position)
   draw_static_images(note_dict, max_note_position)
-  draw_quarter_note(note_dict["E4"]["position_on_staff"], GAME_X/2, max_note_position)
+  draw_music(note_dict, max_note_position)
 
   freq, closest_note, confidence = get_frequency_from_microphone(note_dict, frequency_to_note_dict)
 
@@ -224,7 +243,10 @@ def init_images():
   global TREBLE_CLEF
   global SHARP
   global FLAT
+  global WHOLE_NOTE
+  global HALF_NOTE
   global QUARTER_NOTE
+  global QUARTER_NOTE_FLIP
   #set up images
   TREBLE_CLEF.convert_alpha()
   TREBLE_CLEF = pygame.transform.scale(TREBLE_CLEF,(WORLD_SCALAR*TREBLE_X, WORLD_SCALAR*TREBLE_Y))
@@ -232,8 +254,14 @@ def init_images():
   SHARP = pygame.transform.scale(SHARP,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
   FLAT.convert_alpha()
   FLAT = pygame.transform.scale(FLAT,(WORLD_SCALAR*ACCIDENTAL_X, WORLD_SCALAR*ACCIDENTAL_Y))
+  WHOLE_NOTE.convert_alpha()
+  WHOLE_NOTE = pygame.transform.scale(WHOLE_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
+  HALF_NOTE.convert_alpha()
+  HALF_NOTE = pygame.transform.scale(HALF_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
   QUARTER_NOTE.convert_alpha()
   QUARTER_NOTE = pygame.transform.scale(QUARTER_NOTE,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
+  QUARTER_NOTE_FLIP.convert_alpha()
+  QUARTER_NOTE_FLIP = pygame.transform.scale(QUARTER_NOTE_FLIP,(WORLD_SCALAR*QUARTER_NOTE_X, WORLD_SCALAR*QUARTER_NOTE_Y))
 
 if __name__ == "__main__":
   note_dict = generate_note_dict()
