@@ -140,6 +140,11 @@ def draw_sharp(color, center_x, center_y):
 def draw_flat(color, center_x, center_y):
   screen.blit(FLAT, (center_x - WORLD_SCALAR*ACCIDENTAL_X/2, center_y - 3*WORLD_SCALAR*ACCIDENTAL_Y/4))
 
+def draw_vertical_line(center_x, max_note_position):
+  top_y = position_to_y(note_dict["F5"]["position_on_staff"])
+  bot_y = position_to_y(note_dict["E4"]["position_on_staff"])
+  pygame.draw.line(screen, (0, 0, 0), (cemter_x,  GAME_Y - (GAME_Y * top_y) - WORLD_SCALAR * 0.5), (center_x, GAME_Y - (GAME_Y * bottom_y) - WORLD_SCALAR * 0.5), WORLD_SCALAR * 2)
+
 def draw_whole_note(note_position, center_x, max_note_position):
   position = position_to_y(note_position, max_note_position)
   screen.blit(WHOLE_NOTE, (center_x - WORLD_SCALAR * WHOLE_NOTE_X/2, position -  WORLD_SCALAR * 0.5*WHOLE_NOTE_Y))
@@ -154,8 +159,11 @@ def draw_quarter_note(note_position, center_x, max_note_position):
 
 def draw_music(note_dict, max_note_position):
   draw_whole_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 160, max_note_position)
+  draw_vertical_line(GAME_X/2 - 160, max_note_position)
   draw_half_note(note_dict["E4"]["position_on_staff"], GAME_X/2 - 80, max_note_position)
+  draw_vertical_line(GAME_X/2 - 80, max_note_position)
   draw_quarter_note(note_dict["E4"]["position_on_staff"], GAME_X/2, max_note_position)
+  draw_vertical_line(GAME_X/2, max_note_position)
 
 
 def draw_off_staff_lines(note, note_dict, max_note_position):
